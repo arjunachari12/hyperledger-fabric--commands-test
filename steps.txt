@@ -369,8 +369,7 @@ docker exec peer0.org1.example.com peer channel list
 Step 7: Package chaincode
 Open fabric-samples in VS Code
 
-create file with as lifecycle_setup_org1.sh eclipse-workspace/fabrorkspace/fabric-samples/test-network
-ic-samples/test-network
+create file with as lifecycle_setup_org1.sh /fabric-samples/test-network
 
 
 add belo content
