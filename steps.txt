@@ -391,3 +391,7 @@ source ./lifecycle_setup_org1.sh
 sudo chmod -R 777 .
 
 peer lifecycle chaincode package Carshowroom.tar.gz --path ../chaincode/Carshowroom/build/install/Carshowroom --lang java --label Carshowroom_1
+
+Step 8: Install chaincode
+
+peer lifecycle chaincode install Carshowroom.tar.gz --peerAddresses localhost:7051 --tlsRootCertFiles $CORE_PEER_TLS_ROOTCERT_FILE
