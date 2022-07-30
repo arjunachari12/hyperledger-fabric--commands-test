@@ -386,3 +386,8 @@ export ORDERER_CA=${PWD}/organizations/ordererOrganizations/example.com/orderers
 
 # Source this file
 source ./lifecycle_setup_org1.sh
+
+# package
+sudo chmod -R 777 .
+
+peer lifecycle chaincode package Carshowroom.tar.gz --path ../chaincode/Carshowroom/build/install/Carshowroom --lang java --label Carshowroom_1
