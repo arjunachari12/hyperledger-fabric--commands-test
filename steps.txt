@@ -421,6 +421,22 @@ peer lifecycle chaincode install Carshowroom.tar.gz --peerAddresses localhost:90
 source ./lifecycle_setup_org1.sh
 peer lifecycle chaincode queryinstalled --peerAddresses localhost:7051 --tlsRootCertFiles $CORE_PEER_TLS_ROOTCERT_FILE
 
+#REPLACE Below with your package ID
+export PACKAGEID="Carshowroom_1:15a643668af315217d021811372cfb8a3290b15323493468e741365e1ca4be9a"
+
+echo $PACKAGEID
+
+#download package
+  source ./lifecycle_setup_org1.sh
+peer lifecycle chaincode getinstalledpackage --package-id $PACKAGEID --output-directory . --peerAddresses localhost:7051 --tlsRootCertFiles $CORE_PEER_TLS_ROOTCERT_FILE
+
+
+Step 9: Approve chaincode
+source ./lifecycle_setup_org1.sh
+peer lifecycle chaincode approveformyorg -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile $ORDERER_CA -C samplechannel --name Carshowroom --version 1.0 --init-required --package-id $PACKAGEID --sequence 1 
+
+source ./lifecycle_setup_org2.sh
+peer lifecycle chaincode approveformyorg -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile $ORDERER_CA -C samplechannel --name Carshowroom --version 1.0 --init-required --package-id $PACKAGEID --sequence 1 
 
 
 
@@ -442,4 +458,6 @@ source ./lifecycle_setup_org2.sh
 peer lifecycle chaincode install Carshowroom.tar.gz --peerAddresses localhost:9051 --tlsRootCertFiles $CORE_PEER_TLS_ROOTCERT_FILE 
 source ./lifecycle_setup_org1.sh
 peer lifecycle chaincode queryinstalled --peerAddresses localhost:7051 --tlsRootCertFiles $CORE_PEER_TLS_ROOTCERT_FILE
+
+
 
