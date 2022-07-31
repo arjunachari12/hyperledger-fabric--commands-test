@@ -420,3 +420,26 @@ peer lifecycle chaincode install Carshowroom.tar.gz --peerAddresses localhost:90
 #check isntalled chaincode on Org1
 source ./lifecycle_setup_org1.sh
 peer lifecycle chaincode queryinstalled --peerAddresses localhost:7051 --tlsRootCertFiles $CORE_PEER_TLS_ROOTCERT_FILE
+
+
+
+
+
+
+=======================REDO Network setup and deploy ChainCode ======
+
+sudo ./network.sh down
+docker system prune
+sudo ./network.sh up -ca -s couchdb
+sudo ./network.sh createChannel -c samplechannel
+sudo chmod 666 /var/run/docker.sock
+docker exec peer0.org1.example.com peer channel list
+source ./lifecycle_setup_org1.sh
+sudo chmod -R 777 .
+peer lifecycle chaincode package Carshowroom.tar.gz --path ../chaincode/Carshowroom/build/install/Carshowroom --lang java --label Carshowroom_1
+peer lifecycle chaincode install Carshowroom.tar.gz --peerAddresses localhost:7051 --tlsRootCertFiles $CORE_PEER_TLS_ROOTCERT_FILE
+source ./lifecycle_setup_org2.sh
+peer lifecycle chaincode install Carshowroom.tar.gz --peerAddresses localhost:9051 --tlsRootCertFiles $CORE_PEER_TLS_ROOTCERT_FILE 
+source ./lifecycle_setup_org1.sh
+peer lifecycle chaincode queryinstalled --peerAddresses localhost:7051 --tlsRootCertFiles $CORE_PEER_TLS_ROOTCERT_FILE
+
