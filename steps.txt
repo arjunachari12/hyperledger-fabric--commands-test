@@ -515,3 +515,23 @@ peer lifecycle chaincode querycommitted -C samplechannel --name Carshowroom
 
 
 
+
+
+======
+
+// get the network and contract
+			Network network = gateway.getNetwork("samplechannel");
+			Contract contract = network.getContract("CarShowroom");
+ 
+			byte[] result;
+			contract.submitTransaction("addNewCar", "2", "Ford", "Grey", "7890");
+			result = contract.evaluateTransaction("queryCarById", "2");
+			System.out.println(new String(result));
+ 
+			contract.submitTransaction("changeCarOwnership", "2", "Pragathi");
+			result = contract.evaluateTransaction("queryCarById", "2");
+			System.out.println(new String(result));
+
+
+
+
