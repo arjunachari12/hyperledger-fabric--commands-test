@@ -427,7 +427,7 @@ peer lifecycle chaincode queryinstalled --peerAddresses localhost:7051 --tlsRoot
 
 
 =======================REDO Network setup and deploy ChainCode ======
-
+cd fabric-samples/test-network
 sudo ./network.sh down
 docker system prune
 sudo ./network.sh up -ca -s couchdb
